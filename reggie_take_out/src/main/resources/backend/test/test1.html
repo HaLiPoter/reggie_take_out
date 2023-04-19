@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        img.active{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<!-- 生产环境版本，优化了尺寸和速度 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<body>
+
+<div id="vue_det">
+    <h1>site : {{site}}</h1>
+    <h1>url : {{url}}</h1>
+    <h1>{{details()}}</h1>
+    <h2>{{person}}</h2>
+    <button @click="dosomething">person赋值给person1</button>
+    <h2>{{person1}}</h2>
+    <button @click="dosomething1">person1赋值给person2</button>
+    <h2>{{person2}}</h2>
+
+
+
+    <button @click="changeFlag">修改flag</button>
+    <h2 v-if="flag">草你妈</h2>
+
+    <img v-bind:src="imageUrl" :class="isActive?'active':''" @click="toggleActive" v-show="flag" height="192" width="108" title="图片">
+
+    <ul>
+        <li v-for="(item,index) in arr" :title="item">
+            {{item}}
+        </li>
+    </ul>
+    <input type="button" value="点击" @click="doIt(666)">
+    <input type="text" @keyup.enter="sayHi"><br>
+    <input type="text" v-model="data1"><br>
+    {{data1}}
+</div>
+
+</body>
+<script>
+    var vm = new Vue({
+        el: '#vue_det',
+        data: {
+            site: "菜鸟教程",
+            url: "www.runoob.com",
+            alexa: "10000",
+            data1:"caonima",
+            flag:true,
+            imageUrl:"/backend/images/img_denglu_bj.jpg",
+            isActive:true,
+            arr:[1,2,3,4,5],
+            person:{
+                'name':"fwj",
+                'age':"21",
+                'address':"shantou",
+            },
+            person1:{
+                'name':"",
+                'age':"",
+                'address':"",
+                'parent':"",
+                'cat':"",
+                'id':""
+            },
+            person2:{}
+        },
+        methods: {
+            details: function() {
+                return  this.site + " - 学的不仅是技术，更是梦想！";
+            },
+            dosomething:function (){
+                this.person1=this.person;
+            },
+            changeFlag:function (){
+                this.flag=!this.flag;
+            },
+            toggleActive:function (){
+                this.isActive=!this.isActive;
+            },
+            doIt:function (p1){
+                console.log("做it");
+                console.log(p1);
+            },
+            sayHi:function (){
+                alert("吃了没");
+            },
+            dosomething1:function (){
+                this.person2=this.person1;
+            }
+        }
+    })
+</script>
+</html>

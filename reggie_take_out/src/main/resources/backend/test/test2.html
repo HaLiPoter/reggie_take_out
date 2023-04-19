@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>-->
+<script src="../plugins/vue/vue.js"></script>
+<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+<script src="../plugins/axios/axios.min.js"></script>
+<body>
+<div id="app">
+    <h5>{{a}}---{{b}}</h5>
+    <input type="button" @click="send">
+    <p v-text="msg"></p>
+    <input type="button" @click="todo">
+    <hr>
+    <p v-html="info"></p>
+    <hr>
+    <input type="text" v-model="msg">
+    <input type="text" :value="msg">
+    <br>
+    <input type="text" @keyup.esc="clearInput">
+
+</div>
+</body>
+<script type="text/javascript">
+  var data={
+      a:1,
+      msg:"fwj123",
+      info:"<h2>caonima</h2>"
+  }
+  var vm=new Vue({
+      el:"#app",
+      data:data,
+
+      methods:{
+          send:function (){
+              axios.get("'https://www.runoob.com").then(ret=>{
+
+              })
+          },
+          todo:function (e){
+              this.a="1231231"
+              this.msg="fwr"
+              e.target.style.backgroundColor='red'
+          },
+          clearInput(e){
+              e.target.value=''
+          }
+      }
+  })
+</script>
+</html>
