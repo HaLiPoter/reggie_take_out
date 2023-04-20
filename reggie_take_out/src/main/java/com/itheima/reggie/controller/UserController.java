@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import okhttp3.internal.http2.Http2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.server.Session;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import com.aliyun.teautil.Common;
 import com.aliyun.teautil.models.RuntimeOptions;
 
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/user")
@@ -29,6 +31,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
     @PostMapping("/sendMsg")
     public R<String> sendMsg(@RequestBody User user , HttpSession session) throws Exception {
         String phone = user.getPhone();
@@ -47,7 +51,9 @@ public class UserController {
 //            log.info(sendSmsResponse.body.getCode());
 //            log.info(sendSmsResponse.body.getBizId());
             log.info("验证码:"+code);
-            session.setAttribute(phone,code);
+//            session.setAttribute(phone,code);
+
+            redisTemplate.opsForValue().set(phone,code,5, TimeUnit.MINUTES);
             return R.success("验证码已发送");
         }
         return R.error("发送失败");
@@ -61,7 +67,9 @@ public class UserController {
         log.info("phone: "+phone);
         log.info("code: "+code);
 
-        Object attribute = session.getAttribute(phone);
+//        Object attribute = session.getAttribute(phone);
+        Object attribute = redisTemplate.opsForValue().get(phone);
+
         if (attribute!=null&&attribute.equals(code)){
             LambdaQueryWrapper<User> queryWrapper=new LambdaQueryWrapper<>();
             queryWrapper.eq(User::getPhone,phone);
@@ -73,6 +81,7 @@ public class UserController {
                 userService.save(user);
             }
             session.setAttribute("user",user.getId());
+            redisTemplate.delete(phone);
             return R.success("成功登陆");
         }
         return R.error("登陆失败");
