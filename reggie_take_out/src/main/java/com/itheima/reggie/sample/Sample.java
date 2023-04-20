@@ -14,10 +14,6 @@ public class Sample {
      * @return Client
      * @throws Exception
      */
-    /*
-    LTAI5t9AnJg26tqHGRRKn3ng
-    yTe3V0KuqmztyQzNwVwuMpfOXDyQv5
-    */
 
     public static com.aliyun.dysmsapi20170525.Client createClient(String accessKeyId, String accessKeySecret) throws Exception {
         com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config()
@@ -32,9 +28,9 @@ public class Sample {
     public static com.aliyun.dysmsapi20170525.Client createClient() throws Exception {
         com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config()
                 // 必填，您的 AccessKey ID
-                .setAccessKeyId("LTAI5t9AnJg26tqHGRRKn3ng")
+                .setAccessKeyId("")
                 // 必填，您的 AccessKey Secret
-                .setAccessKeySecret("yTe3V0KuqmztyQzNwVwuMpfOXDyQv5");
+                .setAccessKeySecret("");
         // 访问的域名
         config.endpoint = "dysmsapi.aliyuncs.com";
         return new com.aliyun.dysmsapi20170525.Client(config);
@@ -43,7 +39,7 @@ public class Sample {
     public static void main(String[] args_) throws Exception {
         java.util.List<String> args = java.util.Arrays.asList(args_);
         // 工程代码泄露可能会导致AccessKey泄露，并威胁账号下所有资源的安全性。以下代码示例仅供参考，建议使用更安全的 STS 方式，更多鉴权访问方式请参见：https://help.aliyun.com/document_detail/378657.html
-        com.aliyun.dysmsapi20170525.Client client = Sample.createClient("LTAI5t9AnJg26tqHGRRKn3ng", "yTe3V0KuqmztyQzNwVwuMpfOXDyQv5");
+        com.aliyun.dysmsapi20170525.Client client = Sample.createClient("", "");
         com.aliyun.dysmsapi20170525.models.SendSmsRequest sendSmsRequest = new com.aliyun.dysmsapi20170525.models.SendSmsRequest()
                 .setPhoneNumbers("13829546205")
                 .setSignName("阿里云短信测试")
