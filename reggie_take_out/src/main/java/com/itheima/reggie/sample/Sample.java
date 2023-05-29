@@ -7,13 +7,7 @@ import com.aliyun.teautil.models.RuntimeOptions;
 
 public class Sample {
 
-    /**
-     * 使用AK&SK初始化账号Client
-     * @param accessKeyId
-     * @param accessKeySecret
-     * @return Client
-     * @throws Exception
-     */
+
 
     public static com.aliyun.dysmsapi20170525.Client createClient(String accessKeyId, String accessKeySecret) throws Exception {
         com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config()
@@ -41,9 +35,9 @@ public class Sample {
         // 工程代码泄露可能会导致AccessKey泄露，并威胁账号下所有资源的安全性。以下代码示例仅供参考，建议使用更安全的 STS 方式，更多鉴权访问方式请参见：https://help.aliyun.com/document_detail/378657.html
         com.aliyun.dysmsapi20170525.Client client = Sample.createClient("", "");
         com.aliyun.dysmsapi20170525.models.SendSmsRequest sendSmsRequest = new com.aliyun.dysmsapi20170525.models.SendSmsRequest()
-                .setPhoneNumbers("13829546205")
+                .setPhoneNumbers("")
                 .setSignName("阿里云短信测试")
-                .setTemplateCode("SMS_154950909")
+                .setTemplateCode("")
                 .setTemplateParam("{\"code\":\"7896\"}");
 
         try {
