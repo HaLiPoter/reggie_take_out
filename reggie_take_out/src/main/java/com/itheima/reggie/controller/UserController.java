@@ -43,7 +43,7 @@ public class UserController {
             com.aliyun.dysmsapi20170525.models.SendSmsRequest sendSmsRequest = new com.aliyun.dysmsapi20170525.models.SendSmsRequest()
                     .setPhoneNumbers(phone)
                     .setSignName("阿里云短信测试")
-                    .setTemplateCode("SMS_154950909")
+                    .setTemplateCode("")
                     .setTemplateParam("{\"code\":"+code+"}");
 //            SendSmsResponse sendSmsResponse = client.sendSmsWithOptions(sendSmsRequest, new RuntimeOptions());
 //            log.info(sendSmsResponse.body.getMessage());
